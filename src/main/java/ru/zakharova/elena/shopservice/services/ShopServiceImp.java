@@ -5,35 +5,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.zakharova.elena.shopservice.model.Shop;
 import ru.zakharova.elena.shopservice.model.ShopDTO;
-import ru.zakharova.elena.shopservice.repositories.ShopMapper;
+import ru.zakharova.elena.shopservice.repositories.ShopRepository;
 import ru.zakharova.elena.shopservice.services.utils.ShopDTOBuilder;
 
 @Service
 @RequiredArgsConstructor
 public class ShopServiceImp implements ShopService {
 
-    private ShopMapper mapper;
-    private ShopDTOBuilder builder;
 
-    @Autowired
-    public void setMapper(ShopMapper mapper) {
-        this.mapper = mapper;
-    }
+    private final ShopRepository repository;
+    private ShopDTOBuilder builder;
 
 
     @Override
     public Shop addShop(Shop shop) {
-        return mapper.addShop(shop);
+        return repository.addShop(shop);
     }
 
     @Override
     public Shop getShop(Long id) {
-        return mapper.getShop(id);
+        return repository.getShop(id);
     }
 
     @Override
     public Shop updateShop(Shop shop) {
-        return mapper.updateShop(shop);
+        return repository.updateShop(shop);
     }
 
     @Override

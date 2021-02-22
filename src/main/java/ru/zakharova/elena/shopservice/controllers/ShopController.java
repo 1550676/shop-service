@@ -14,20 +14,20 @@ import ru.zakharova.elena.shopservice.services.ShopService;
 public class ShopController {
     private final ShopService shopService;
 
-    @GetMapping(value = "/dto/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/shop/{id}")
     public ResponseEntity<?> getShopDTO(@PathVariable Long id) {
         ShopDTO dto = shopService.getShopDTO(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getShop(@PathVariable Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity getShop(@PathVariable Long id) {
         Shop shop = shopService.getShop(id);
-        return new ResponseEntity<>(shop, HttpStatus.OK);
+        return new ResponseEntity(shop, HttpStatus.OK);
     }
 
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Shop addShop(@RequestBody Shop shop) {
         if (shop.getId() != null) {
@@ -36,8 +36,8 @@ public class ShopController {
         return shopService.addShop(shop);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateShop(@RequestBody  Shop shop) {
-        return new ResponseEntity<>(shopService.updateShop(shop), HttpStatus.OK);
+    @PutMapping
+    public ResponseEntity updateShop(@RequestBody  Shop shop) {
+        return new ResponseEntity(shopService.updateShop(shop), HttpStatus.OK);
     }
 }

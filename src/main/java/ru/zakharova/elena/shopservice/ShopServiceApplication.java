@@ -1,6 +1,5 @@
 package ru.zakharova.elena.shopservice;
 
-import org.hibernate.SessionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

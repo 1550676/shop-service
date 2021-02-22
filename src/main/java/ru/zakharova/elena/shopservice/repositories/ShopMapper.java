@@ -1,51 +1,25 @@
 package ru.zakharova.elena.shopservice.repositories;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import ru.zakharova.elena.shopservice.model.Shop;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Component
-public class ShopMapper {
+public class ShopMapper implements RowMapper<Shop> {
 
-
-    private SessionFactory factory;
-    private ShopDAO dao;
-    @Autowired
-    public void setFactory(SessionFactory factory) {
-        this.factory = factory;
-    }
-    @Autowired
-    public void setDao(ShopDAO dao) {
-        this.dao = dao;
-    }
-
-    public Shop addShop(Shop shop) {
-        dao.addShop(shop);
-        Session session = this.factory.getCurrentSession();
-        session.save(shop);
-        return shop;
-    }
-
-    public Shop getShop(Long id) {
-        Shop shop = dao.getShop(id);
-        if (shop == null){
-            Session session = this.factory.getCurrentSession();
-            session.beginTransaction();
-            shop = session.find(Shop.class, id);
-            session.getTransaction().commit();
-        }
-        System.out.println(shop);
-        return shop;
-
-    }
-
-    public Shop updateShop(Shop shop) {
-        Session session = this.factory.getCurrentSession();
-        session.update(shop);
-        dao.updateShop(shop);
+    @Override
+    public Shop mapRow(ResultSet resultSet, int i) throws SQLException {
+        Shop shop = new Shop();
+        shop.setId(resultSet.getLong("id"));
+        shop.setName(resultSet.getString("name"));
+        shop.setEmail(resultSet.getString("email"));
+        shop.setInn(resultSet.getString("inn"));
+        shop.setDomainName(resultSet.getString("domain_name"));
+        shop.setType(resultSet.getString("type"));
         return shop;
     }
 }
