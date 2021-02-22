@@ -17,11 +17,15 @@ public class ShopRepository {
 
     @Transactional
     public Shop addShop(Shop shop) {
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("name", animal.getName());
-//        jdbc.update("insert into shops (name) values (:name)", paramSource, holder);
-//        animal.setId(holder.getKey().longValue());
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", shop.getName());
+        params.put("email", shop.getEmail());
+        params.put("inn", shop.getInn());
+        params.put("domain_name", shop.getDomainName());
+        params.put("type", shop.getType());
+        int save = jdbc.update("insert into shops (name, email, inn, domain_name, type) values " +
+                "(:name, :email, :inn, :domain_name, :type)", params);
+        dao.addShop(shop);
         return shop;
     }
 
@@ -42,7 +46,14 @@ public class ShopRepository {
     public Shop updateShop(Shop shop) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", shop.getId());
-        jdbc.update("insert into shops (id) values (:id)", params);
+        params.put("name", shop.getName());
+        params.put("email", shop.getEmail());
+        params.put("inn", shop.getInn());
+        params.put("domain_name", shop.getDomainName());
+        params.put("type", shop.getType());
+        int save = jdbc.update("update shops (name, email, inn, domain_name, type) values " +
+                "(:name, :email, :inn, :domain_name, :type) where id=:id", params);
+        System.out.println(save);
         dao.updateShop(shop);
         return shop;
     }

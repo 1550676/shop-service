@@ -28,12 +28,8 @@ public class ShopController {
 
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Shop addShop(@RequestBody Shop shop) {
-        if (shop.getId() != null) {
-            shop.setId(null);
-        }
-        return shopService.addShop(shop);
+    public ResponseEntity addShop(@RequestBody Shop shop) {
+        return new ResponseEntity(shopService.addShop(shop), HttpStatus.CREATED);
     }
 
     @PutMapping
