@@ -2,7 +2,6 @@ package ru.zakharova.elena.shopservice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.zakharova.elena.shopservice.model.Shop;
@@ -28,8 +27,8 @@ public class ShopController {
 
 
     @PostMapping
-    public ResponseEntity addShop(@RequestBody Shop shop) {
-        return new ResponseEntity(shopService.addShop(shop), HttpStatus.CREATED);
+    public ResponseEntity addShop(@RequestBody ShopDTO shopDTO) {
+        return new ResponseEntity(shopService.addShop(shopDTO), HttpStatus.CREATED);
     }
 
     @PutMapping

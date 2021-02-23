@@ -4,7 +4,7 @@ import ru.zakharova.elena.shopservice.model.Shop;
 import ru.zakharova.elena.shopservice.model.ShopDTO;
 
 public interface ShopService {
-    Shop addShop(Shop shop);
+    Shop addShop(ShopDTO shopDTO);
     Shop getShop(Long id);
     Shop updateShop(Shop shop);
     ShopDTO getShopDTO(Long id);
