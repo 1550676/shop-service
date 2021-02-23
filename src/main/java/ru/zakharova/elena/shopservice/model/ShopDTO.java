@@ -19,9 +19,7 @@ public class ShopDTO {
         return new ShopDTOMemento(name, email, inn, domainName, type);
     }
 
-    // восстановление состояния
-    public void restoreState(ShopDTOMemento memento)
-    {
+    public void restoreState(ShopDTOMemento memento) {
         this.name=memento.getName();
         this.email = memento.getEmail();
         this.inn = memento.getInn();
